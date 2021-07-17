@@ -1,0 +1,100 @@
+
+.getdeliveredChipClass {
+  align-items: center;
+}
+
+.productImage {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.productTitle {
+  text-align: center;
+  font-family: agenda,sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  color: #474747;
+  height: 54px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-height: 16px;
+  max-height: 48px;
+  -webkit-box-orient: vertical;
+  margin-bottom: 5px;
+}
+
+.productMRP {
+  font-family: futura-pt,sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  text-decoration: line-through;
+  font-size: 20px;
+
+}
+
+.productOurSellingPrice {
+  font-family: macho,sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 25px;
+  text-align: right;
+}
+
+.priceTag {
+  font-family: futura-pt,sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  text-align: right;
+  padding-right: 3px;
+}
+
+
+.specialOfferTiles {
+  width: 100%;
+}
+
+.ion-nowrap {
+  flex-wrap: nowrap;
+  overflow-x: scroll!important;
+  overflow-y: hidden;
+}
+
+.saveTag {
+  font-family: macho,sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  font-size: 8px;
+}
+
+.savepriceAmount {
+  font-family: macho,sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.bottomcardsubtitle {
+  font-family: futura-pt,sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #188841b6;
+}
+
+
+.bottomitemClass {
+  border-radius: 10px;
+  border: solid 2px #188841;
+}
+
+.bannerClass {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.earnpointClass {
+  font-family: futura-pt,sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+

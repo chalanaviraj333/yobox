@@ -1,17 +1,32 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
+
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <h2 class="headerTitleClass">Products</h2>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon class="header-icons" slot="icon-only" src="assets/icon/search.svg"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon class="header-icons" slot="icon-only" src="assets/icon/shopping-cart.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<app-header headerTitle="Products"></app-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+<ion-content [fullscreen]="false">
+
+  <ion-list-header>
+    <ion-label>Categories</ion-label>
+  </ion-list-header>
+
+  <ion-list *ngFor="let categories of allCategories">
+    <ion-item lines="none" (click)="onClickCategories(categories.categoryName)">
+      <ion-avatar slot="start">
+        <img src="{{categories.categoryIcon}}">
+      </ion-avatar>
+      <ion-label>{{categories.categoryName}}</ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

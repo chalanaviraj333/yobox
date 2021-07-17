@@ -20,6 +20,22 @@ const routes: Routes = [
         loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {
+        path: 'more',
+        loadChildren: () => import('../more/more.module').then( m => m.MorePageModule)
+      },
+      {
+        path: 'tab1/specialoffers',
+        loadChildren: () => import('../specialoffers/specialoffers.module').then( m => m.SpecialoffersPageModule)
+      },
+      {
+        path: 'tab1/orderagain',
+        loadChildren: () => import('../orderagain/orderagain.module').then( m => m.OrderagainPageModule)
+      },
+      {
+        path: 'tab2/selectcategoryitems/:selectedCategory',
+        loadChildren: () => import('../select-category-items/select-category-items.module').then( m => m.SelectCategoryItemsPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

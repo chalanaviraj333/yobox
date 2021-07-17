@@ -5,7 +5,17 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
-  }
+  },
+  {
+    path: 'searchpage',
+    loadChildren: () => import('./searchpage/searchpage.module').then( m => m.SearchpagePageModule)
+  },
+  {
+    path: 'cart',
+    loadChildren: () => import('./cart/cart.module').then( m => m.CartPageModule)
+  },
+
+
 ];
 @NgModule({
   imports: [

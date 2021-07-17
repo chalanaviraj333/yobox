@@ -1,0 +1,29 @@
+.logoheader {
+  width: 20%;
+  height: 20%;
+  margin-left:20px;
+}
+
+
+.header-icons {
+  width: 25px;
+}
+
+.cartcountClass {
+  position: absolute;
+	top: 1px;
+	right: -0.2rem;
+	opacity: 0.9;
+
+  & ~ ion-icon {
+    margin-right: 1rem;
+  }
+}
+
+.headerTitleClass {
+  font-family: futura-pt,sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  margin-left: 10px;
+  color: #188841;
+}
