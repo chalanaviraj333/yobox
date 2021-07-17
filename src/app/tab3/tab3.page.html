@@ -52,12 +52,12 @@
         <ion-row>
           <ion-col class="ion-text-center ion-no-padding">
             <ion-chip color="primary" class="ion-no-margin">
-              <ion-label class="savepriceAmount">2 for 24.00</ion-label>
+              <ion-label class="ionBageClass">2 for 24.00</ion-label>
             </ion-chip>
 
             <ion-label class="ion-text-wrap">
 
-              <ion-note color="danger" class="ion-text-nowrap savepriceAmount">15.00</ion-note>
+              <ion-note color="danger" class="ion-text-nowrap ionBageClass">15.00</ion-note>
               <ion-label class="saveTag">each </ion-label>
             </ion-label>
           </ion-col>
@@ -65,7 +65,7 @@
     <ion-row >
       <ion-col size-xs="12" size-sm="4" size-md="3" size-lg="3" class="ion-text-center">
 
-          <ion-button size="small" expand="block" color="primary">ADD</ion-button>
+          <ion-button class="addButtonClass" size="small" expand="block" color="primary" (click)="onClickItemAdd(product.key)">ADD</ion-button>
 
     </ion-col >
     </ion-row>
@@ -126,7 +126,7 @@
     <ion-row>
       <ion-col size-xs="12" size-sm="4" size-md="3" size-lg="3">
 
-          <ion-button size="small" expand="block" color="primary">ADD</ion-button>
+          <ion-button class="addButtonClass" size="small" expand="block" color="primary" (click)="onClickItemAdd(product.key)">ADD</ion-button>
     </ion-col >
     </ion-row>
       </ion-grid>

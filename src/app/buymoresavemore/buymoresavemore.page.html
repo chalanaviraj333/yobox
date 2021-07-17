@@ -1,4 +1,4 @@
-<app-subheader subHeaderTitle="Buy More.Save More" backButtonRedirect="/"></app-subheader>
+<app-subheader subHeaderTitle="Save More" backButtonRedirect="tabs/tab3"></app-subheader>
 <ion-toolbar class="secondtoolbarClass" color="light">
   <ion-label class="noofprodClass">{{buymoresavemore.length}} Products</ion-label>
   <ion-button class="filterButtonClass" size="small" shape="round" slot="end" fill="outline">Filter</ion-button>
@@ -17,6 +17,14 @@
           <ion-row>
             <ion-col>
                 <h6 class="productTitle">{{product.productname}}</h6>
+            </ion-col>
+          </ion-row>
+
+          <ion-row >
+            <ion-col class="ion-text-center">
+              <ion-chip color="primary" class="ion-no-margin">
+                <ion-label class="ionBageClass">2 for 24.00</ion-label>
+              </ion-chip>
             </ion-col>
           </ion-row>
 
