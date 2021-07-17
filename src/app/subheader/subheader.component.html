@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="" defaultHref={{backButtonRedirect}}></ion-back-button>
+    </ion-buttons>
+    <ion-title class="headerTitleClass" *ngIf="subHeaderTitle" class="headerTitleClass">{{subHeaderTitle}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="_onClickSearch()">
+        <ion-icon class="header-icons" slot="icon-only" src="assets/icon/search.svg"></ion-icon>
+      </ion-button>
+      <ion-button routerLink="/cart">
+        <ion-badge *ngIf="cartService.cartItemsQuantity" class="cartcountClass" color="success">{{cartService.cartItemsQuantity}}</ion-badge>
+        <ion-icon class="header-icons" slot="icon-only" src="assets/icon/shopping-cart.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

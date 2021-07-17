@@ -4,17 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { SpecialoffersPageRoutingModule } from './specialoffers-routing.module';
+import { BuymoresavemorePageRoutingModule } from './buymoresavemore-routing.module';
 
-import { SpecialoffersPage } from './specialoffers.page';
+import { BuymoresavemorePage } from './buymoresavemore.page';
 import { SubheaderComponent } from '../subheader/subheader.component';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    SpecialoffersPageRoutingModule,
+    BuymoresavemorePageRoutingModule
   ],
-  declarations: [SpecialoffersPage, SubheaderComponent]
+  declarations: [BuymoresavemorePage,SubheaderComponent]
 })
-export class SpecialoffersPageModule {}
+export class BuymoresavemorePageModule {}

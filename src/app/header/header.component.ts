@@ -12,7 +12,6 @@ export class HeaderComponent implements OnInit {
 
   @Input() public headerURL: string;
   @Input() public headerTitle: string;
-  @Input() public smallHeaderTitle: string;
 
   constructor(public modalService: ModalService, public cartService: CartserviceService) { }
 

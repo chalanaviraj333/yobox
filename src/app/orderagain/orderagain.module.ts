@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { OrderagainPageRoutingModule } from './orderagain-routing.module';
 
 import { OrderagainPage } from './orderagain.page';
+import { SubheaderComponent } from '../subheader/subheader.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { OrderagainPage } from './orderagain.page';
     IonicModule,
     OrderagainPageRoutingModule
   ],
-  declarations: [OrderagainPage]
+  declarations: [OrderagainPage, SubheaderComponent]
 })
 export class OrderagainPageModule {}

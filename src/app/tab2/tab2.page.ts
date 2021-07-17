@@ -11,7 +11,7 @@ export class Tab2Page {
 
   public allCategories: Array<Categories> = [{categoryName: 'Rice', categoryIcon: 'assets/icon/rice.svg'},
   {categoryName: 'Canned Foods', categoryIcon: 'assets/icon/cannedfood.svg'},
-  {categoryName: 'Dry-Baking Goods', categoryIcon: 'assets/icon/drybakinggoods.svg'},
+  {categoryName: 'Baking Goods', categoryIcon: 'assets/icon/drybakinggoods.svg'},
   {categoryName: 'Biscuits', categoryIcon: 'assets/icon/biscuits.svg'},
   {categoryName: 'Condiments', categoryIcon: 'assets/icon/condiments.svg'},
   {categoryName: 'Cleaners', categoryIcon: 'assets/icon/cleaners.svg'},

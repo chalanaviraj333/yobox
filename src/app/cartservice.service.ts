@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { AddtocartmodalPage } from './addtocartmodal/addtocartmodal.page';
+import { AddtocartsecondPage } from './addtocartsecond/addtocartsecond.page';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class CartserviceService {
 
   async onClickAddButton(selectedItem) {
     const modal = await this.modalController.create({
-      component: AddtocartmodalPage,
+      component: AddtocartsecondPage,
       componentProps: {
         "selectedProduct": selectedItem
       },

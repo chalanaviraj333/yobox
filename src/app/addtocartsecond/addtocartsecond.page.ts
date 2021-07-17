@@ -4,11 +4,11 @@ import { CartserviceService } from '../cartservice.service';
 import { Product } from '../product';
 
 @Component({
-  selector: 'app-selectitemquantity',
-  templateUrl: './selectitemquantity.component.html',
-  styleUrls: ['./selectitemquantity.component.scss'],
+  selector: 'app-addtocartsecond',
+  templateUrl: './addtocartsecond.page.html',
+  styleUrls: ['./addtocartsecond.page.scss'],
 })
-export class SelectitemquantityComponent implements OnInit {
+export class AddtocartsecondPage implements OnInit {
 
   @Input() selectedProduct : Product;
 
@@ -36,5 +36,6 @@ export class SelectitemquantityComponent implements OnInit {
   onClickAddtoCart() {
     this.cartService.addtoCart();
   }
+
 
 }

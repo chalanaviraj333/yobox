@@ -1,32 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CartserviceService } from '../cartservice.service';
 import { Product } from '../product';
 
 @Component({
-  selector: 'app-select-category-items',
-  templateUrl: './select-category-items.page.html',
-  styleUrls: ['./select-category-items.page.scss'],
+  selector: 'app-buymoresavemore',
+  templateUrl: './buymoresavemore.page.html',
+  styleUrls: ['./buymoresavemore.page.scss'],
 })
-export class SelectCategoryItemsPage implements OnInit {
+export class BuymoresavemorePage implements OnInit {
 
-  public headerTitle: string = '';
-  public categoryProducts: Array<Product> = [];
+  public buymoresavemore: Array<Product> = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private http: HttpClient, public modalController: ModalController, public cartService: CartserviceService) {
-
-    this.activatedRoute.paramMap.subscribe((paramMap) => {
-      if (!paramMap.has("selectedCategory")) {
-        // redirect
-        return;
-      }
-      const headerParam = paramMap.get("selectedCategory");
-      const result = headerParam.replace( /([A-Z])/g, " $1" );
-      this.headerTitle = result.charAt(0).toUpperCase() + result.slice(1);
-    });
-  }
+  constructor(private http: HttpClient, public modalController: ModalController, public cartService: CartserviceService) {}
 
   ngOnInit() {
     this.http
@@ -36,7 +23,7 @@ export class SelectCategoryItemsPage implements OnInit {
       .subscribe((resData) => {
         for (const key in resData) {
           if (resData.hasOwnProperty(key)) {
-            this.categoryProducts.push({
+            this.buymoresavemore.push({
               key,
               productnumber: resData[key].productnumber,
               productname: resData[key].productname,
@@ -48,13 +35,13 @@ export class SelectCategoryItemsPage implements OnInit {
               productshell: resData[key].productshell,
               cssClass: 'cssLeftClass'
             });
-            this.categoryProducts.sort((a, b) => (a.productnumber > b.productnumber ? 1 : -1));
+            this.buymoresavemore.sort((a, b) => (a.productnumber > b.productnumber ? 1 : -1));
           }
         }
 
         let indexofProduct: number = 0;
 
-        this.categoryProducts.forEach(product => {
+        this.buymoresavemore.forEach(product => {
          indexofProduct = indexofProduct + 1;
          if (indexofProduct % 2 == 0) {
           product.cssClass = "cssLeftClass";
@@ -69,9 +56,10 @@ export class SelectCategoryItemsPage implements OnInit {
 
   async onClickAddButton(selectedproductKey) {
 
-    const selectedItem : Product = this.categoryProducts.find(product => product.key === selectedproductKey);
+    const selectedItem : Product = this.buymoresavemore.find(product => product.key === selectedproductKey);
 
     await this.cartService.onClickAddButton(selectedItem);
   }
+
 
 }

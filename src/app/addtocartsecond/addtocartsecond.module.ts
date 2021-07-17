@@ -3,14 +3,18 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-import { SelectitemquantityComponent } from './selectitemquantity.component';
+
+import { AddtocartsecondPageRoutingModule } from './addtocartsecond-routing.module';
+
+import { AddtocartsecondPage } from './addtocartsecond.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    AddtocartsecondPageRoutingModule
   ],
-  declarations: [SelectitemquantityComponent]
+  declarations: [AddtocartsecondPage]
 })
-export class SelectitemquantityComponentModule {}
+export class AddtocartsecondPageModule {}

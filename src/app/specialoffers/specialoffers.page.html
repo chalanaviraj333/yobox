@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
 
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -17,7 +17,14 @@
     <ion-button class="filterButtonClass" size="small" shape="round" slot="end" fill="outline">Filter</ion-button>
 
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
+
+<app-subheader subHeaderTitle="Special Offers" backButtonRedirect="/"></app-subheader>
+<ion-toolbar class="secondtoolbarClass" color="light">
+  <ion-label class="noofprodClass">{{specialProducts.length}} Products</ion-label>
+  <ion-button class="filterButtonClass" size="small" shape="round" slot="end" fill="outline">Filter</ion-button>
+
+</ion-toolbar>
 
 <ion-content [fullscreen]="false">
 

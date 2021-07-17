@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { SelectCategoryItemsPageRoutingModule } from './select-category-items-routing.module';
 
 import { SelectCategoryItemsPage } from './select-category-items.page';
+import { SubheaderComponent } from '../subheader/subheader.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { SelectCategoryItemsPage } from './select-category-items.page';
     IonicModule,
     SelectCategoryItemsPageRoutingModule
   ],
-  declarations: [SelectCategoryItemsPage]
+  declarations: [SelectCategoryItemsPage, SubheaderComponent]
 })
 export class SelectCategoryItemsPageModule {}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { MypointsComponent } from './mypoints/mypoints.component';
+import { MypointsmodalPage } from './mypointsmodal/mypointsmodal.page';
 import { SearchpagePage } from './searchpage/searchpage.page';
 
 @Injectable({
@@ -22,7 +22,7 @@ export class ModalService {
 
   async onClickMyPoints() {
     const modal = await this.modalController.create({
-      component: MypointsComponent,
+      component: MypointsmodalPage,
       cssClass: 'my-points-page-class',
       swipeToClose: true,
     });

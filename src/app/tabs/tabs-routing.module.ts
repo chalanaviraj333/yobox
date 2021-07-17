@@ -36,6 +36,10 @@ const routes: Routes = [
         loadChildren: () => import('../select-category-items/select-category-items.module').then( m => m.SelectCategoryItemsPageModule)
       },
       {
+        path: 'tab3/buymoresavemore',
+        loadChildren: () => import('../buymoresavemore/buymoresavemore.module').then( m => m.BuymoresavemorePageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
