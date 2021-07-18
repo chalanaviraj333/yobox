@@ -13,7 +13,7 @@ import { Product } from '../product';
 export class SelectCategoryItemsPage implements OnInit {
 
   public headerTitle: string = '';
-  public categoryProducts: Array<Product> = [];
+  public allProducts: Array<Product> = [];
 
   constructor(private activatedRoute: ActivatedRoute, private http: HttpClient, public modalController: ModalController, public cartService: CartserviceService) {
 
@@ -36,7 +36,7 @@ export class SelectCategoryItemsPage implements OnInit {
       .subscribe((resData) => {
         for (const key in resData) {
           if (resData.hasOwnProperty(key)) {
-            this.categoryProducts.push({
+            this.allProducts.push({
               key,
               productnumber: resData[key].productnumber,
               productname: resData[key].productname,
@@ -48,13 +48,13 @@ export class SelectCategoryItemsPage implements OnInit {
               productshell: resData[key].productshell,
               cssClass: 'cssLeftClass'
             });
-            this.categoryProducts.sort((a, b) => (a.productnumber > b.productnumber ? 1 : -1));
+            this.allProducts.sort((a, b) => (a.productnumber > b.productnumber ? 1 : -1));
           }
         }
 
         let indexofProduct: number = 0;
 
-        this.categoryProducts.forEach(product => {
+        this.allProducts.forEach(product => {
          indexofProduct = indexofProduct + 1;
          if (indexofProduct % 2 == 0) {
           product.cssClass = "cssLeftClass";
@@ -69,7 +69,7 @@ export class SelectCategoryItemsPage implements OnInit {
 
   async onClickAddButton(selectedproductKey) {
 
-    const selectedItem : Product = this.categoryProducts.find(product => product.key === selectedproductKey);
+    const selectedItem : Product = this.allProducts.find(product => product.key === selectedproductKey);
 
     await this.cartService.onClickAddButton(selectedItem);
   }

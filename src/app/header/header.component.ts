@@ -13,7 +13,10 @@ export class HeaderComponent implements OnInit {
   @Input() public headerURL: string;
   @Input() public headerTitle: string;
 
-  constructor(public modalService: ModalService, public cartService: CartserviceService) { }
+  constructor(public modalService: ModalService, public cartService: CartserviceService) {
+
+  }
+
 
   ngOnInit() {}
 

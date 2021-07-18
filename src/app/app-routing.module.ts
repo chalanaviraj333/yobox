@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   {
@@ -12,11 +13,19 @@ const routes: Routes = [
   },
   {
     path: 'cart',
-    loadChildren: () => import('./cart/cart.module').then( m => m.CartPageModule)
+    loadChildren: () => import('./cart/cart.module').then( m => m.CartPageModule),canLoad: [AuthGuard]
   },
   {
     path: 'addtocartsecond',
     loadChildren: () => import('./addtocartsecond/addtocartsecond.module').then( m => m.AddtocartsecondPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'signup',
+    loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
   },
 
 ];
