@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OrderconfirmService } from '../orderconfirm.service';
 
 @Component({
   selector: 'app-cart',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartPage implements OnInit {
 
-  constructor() { }
+  constructor(private orderService: OrderconfirmService) { }
 
   ngOnInit() {
+  }
+
+  checkUserId() {
+    this.orderService.savenewOrder();
   }
 
 }
