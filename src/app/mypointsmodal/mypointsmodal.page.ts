@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { User } from '../user';
+import { UserDetails } from '../user';
 
 @Component({
   selector: 'app-mypointsmodal',
@@ -9,7 +9,7 @@ import { User } from '../user';
 })
 export class MypointsmodalPage implements OnInit {
 
-  public currentUser: User = {username: 'Chalana Muthukuda', userType: 'broze', joinYear: '2012'};
+  public currentUser: UserDetails = {username: 'Chalana Muthukuda', userType: 'broze', joinYear: '2012'};
 
   constructor(private modalController: ModalController) { }
 

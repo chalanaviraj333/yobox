@@ -1,7 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Form, NgForm } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { AuthserviceService } from '../authservice.service';
+import { UserDetails } from '../user';
 
 @Component({
   selector: 'app-signup',
@@ -10,20 +12,34 @@ import { AuthserviceService } from '../authservice.service';
 })
 export class SignupPage implements OnInit {
 
+  private newUser: UserDetails = {};
 
-  constructor(private authService: AuthserviceService, private alertCtrl: AlertController) { }
+  constructor(private authService: AuthserviceService, private alertCtrl: AlertController, private http: HttpClient) { }
 
   ngOnInit() {
   }
 
-  onSubmit(form: NgForm) {
+onSubmit(form: NgForm) {
 
     const email = form.value.username;
     const password = form.value.passwordone;
 
-    console.log(form.value.username, form.value.passwordone);
     this.authService.signup(email,password).subscribe(resData => {
-      console.log(resData);
+
+      if (resData.localId) {
+
+        this.newUser.userID = resData.localId;
+
+        this.http.post<{name: string}>("https://muthukudamerchant-496e8-default-rtdb.firebaseio.com/allusers.json", this.newUser)
+      .subscribe(usersaveResData => {
+          console.log(usersaveResData);
+
+        }
+      );
+
+      }
+
+
     }, errorRes => {
       const code= errorRes.error.error.message;
       console.log(errorRes);
@@ -35,6 +51,13 @@ export class SignupPage implements OnInit {
     }
 
     );
+
+      // this.http.post<{name: string}>("https://muthukudamerchant-496e8-default-rtdb.firebaseio.com/allusers.json", this.newUser)
+      // .subscribe(usersaveResData => {
+      //     console.log(usersaveResData);
+
+      //   }
+      // );
   }
 
   private showAlert(message: string) {

@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, from } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from './user.model';
 import { map, tap } from 'rxjs/operators';
+import { Storage } from '@capacitor/storage';
 
 export interface AuthResponseData {
   kind: string;
@@ -19,6 +20,8 @@ export interface AuthResponseData {
   providedIn: 'root'
 })
 export class AuthserviceService {
+
+  constructor(private http: HttpClient) { }
 
   private _user= new BehaviorSubject<User>(null);
 
@@ -46,26 +49,72 @@ export class AuthserviceService {
     }));
   }
 
-  constructor(private http: HttpClient) { }
+  autoLogin() {
+    return from(Storage.get({key: 'authData'})).pipe(map(
+      storedData => {
+        if (!storedData || !storedData.value) {
+          return null;
+        }
+        const parsedData = JSON.parse(storedData.value) as {
+          token: string;
+          tokenExpirationDate: string;
+          userId: string;
+          email: string;
+        };
+        const expirationTIme = new Date(parsedData.tokenExpirationDate);
+        if (expirationTIme <= new Date()) {
+          return null;
+        }
+        const user = new User(parsedData.userId,
+          parsedData.email,
+          parsedData.token,
+          expirationTIme);
+          return user;
+      }),
+      tap(user => {
+        if (user) {
+          this._user.next(user);
+        }
+      }),
+      map(user => {
+        return !!user;
+      })
+      )
+  }
+
+
 
   login(email: string, password: string) {
     // this._userIsAuthenticated = true;
     return this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseAPIKey}`,
-      {email: email, password: password}
+      {email: email, password: password, returnSecureToken: true}
     ).pipe(tap(userData => {
       const expirationTime = new Date(new Date().getTime() + (+userData.expiresIn * 1000));
       this._user.next(new User(userData.localId, userData.email, userData.idToken, expirationTime));
+
+      this.storeAuthData(userData.localId, userData.idToken, expirationTime.toISOString(), userData.email);
     }));
   }
 
   logout() {
     this._user.next(null);
+    Storage.remove({key: 'authData'});
   }
 
   signup(email: string, password: string) {
     return this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseAPIKey}`,
     {email: email, password: password, returnSecureToken: true}
     )
+
+  }
+
+  private storeAuthData(userId: string, token: string, tokenExpirationDate: string, email: string) {
+
+      const data = JSON.stringify({userId: userId, token: token, tokenExpirationDate: tokenExpirationDate, email: email});
+      Storage.set({
+        key: 'authData',
+        value: data,
+      });
 
   }
 }

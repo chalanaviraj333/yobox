@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthserviceService } from '../authservice.service';
 import { OrderconfirmService } from '../orderconfirm.service';
 
 @Component({
@@ -8,13 +9,17 @@ import { OrderconfirmService } from '../orderconfirm.service';
 })
 export class CartPage implements OnInit {
 
-  constructor(private orderService: OrderconfirmService) { }
+  constructor(private orderService: OrderconfirmService, private authServie: AuthserviceService) { }
 
   ngOnInit() {
   }
 
   checkUserId() {
     this.orderService.savenewOrder();
+  }
+
+  onclickLogout() {
+    this.authServie.logout();
   }
 
 }
