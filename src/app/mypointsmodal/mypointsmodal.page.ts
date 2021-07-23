@@ -9,7 +9,14 @@ import { UserDetails } from '../user';
 })
 export class MypointsmodalPage implements OnInit {
 
-  public currentUser: UserDetails = {username: 'Chalana Muthukuda', userType: 'broze', joinYear: '2012'};
+  public currentUser: UserDetails = {userID: '123jjqwjipjdjw',
+    firstName: 'Chalana',
+    lastName: 'Muthukuda',
+    employeeNumber: '12342234',
+    emailAddress: 'chalana.viraj@yahoo.com',
+    mobileNumber: '0451717787',
+    userType: 'gold',
+    joinYear: '2012'};
 
   constructor(private modalController: ModalController) { }
 

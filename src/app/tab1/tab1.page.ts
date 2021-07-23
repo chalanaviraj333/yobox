@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
+import { take } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { CartserviceService } from '../cartservice.service';
 import { ModalService } from '../modal.service';
+import { AuthserviceService } from '../authservice.service';
+import { UserDetails } from '../user';
 
 @Component({
   selector: 'app-tab1',
@@ -13,10 +16,29 @@ export class Tab1Page implements OnInit {
 
   public specialProducts: Array<Product> = [];
   public orderAgain: Array<Product> = [];
+  public islogin: boolean = false;
+  public userDetails: UserDetails;
 
-  constructor(private http: HttpClient, private modalServie: ModalService, public cartService: CartserviceService) {}
+  constructor(private http: HttpClient, private modalServie: ModalService, public cartService: CartserviceService,
+    public authService: AuthserviceService) {}
 
   ngOnInit() {
+
+    // checking user login or not
+    this.authService.getStorageData();
+    // this.authService.getStorageData().subscribe(resData => {
+    //   if (!resData) {
+    //     return;
+    //   }
+    //   else {
+    //     const loggedinUserID: string = resData.id;
+    //     this.islogin = true;
+
+    //   }
+
+    // })
+
+
     // getting Special products form database
     this.http
       .get<{ [key: string]: Product }>(
@@ -86,5 +108,27 @@ export class Tab1Page implements OnInit {
     await this.modalServie.onClickMyPoints();
 
   }
+
+  async onClickSignUp()
+  {
+    await this.modalServie.onClickSignUp();
+  }
+
+
+  async onClickLogIn() {
+    await this.modalServie.onClickLogIn();
+  }
+
+  checkuserloign() {
+    console.log(this.islogin);
+  }
+
+  signoutButton() {
+    this.authService.logout();
+  }
+
+  // ionViewWillEnter() {
+
+  // }
 
 }

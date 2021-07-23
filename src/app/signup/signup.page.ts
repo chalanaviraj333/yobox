@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Form, NgForm } from '@angular/forms';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { AuthserviceService } from '../authservice.service';
 import { UserDetails } from '../user';
 
@@ -11,59 +11,119 @@ import { UserDetails } from '../user';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
+  private allusersRegisted: Array<string> = [];
+  public isChecked: boolean = false;
 
-  private newUser: UserDetails = {};
-
-  constructor(private authService: AuthserviceService, private alertCtrl: AlertController, private http: HttpClient) { }
+  constructor(
+    private authService: AuthserviceService,
+    private alertCtrl: AlertController,
+    private http: HttpClient,
+    public modalController: ModalController,
+    public toastController: ToastController
+  ) {}
 
   ngOnInit() {
+    this.http
+      .get<{ [key: string]: UserDetails }>(
+        'https://muthukudamerchant-496e8-default-rtdb.firebaseio.com/allusers.json'
+      )
+      .subscribe((resData) => {
+        for (const key in resData) {
+          if (resData.hasOwnProperty(key)) {
+            this.allusersRegisted.push(resData[key].employeeNumber);
+          }
+        }
+      });
+
   }
 
-onSubmit(form: NgForm) {
+  async presentToast() {
 
-    const email = form.value.username;
-    const password = form.value.passwordone;
+    const toast = await this.toastController.create({
+      header: 'Signup Successfully',
+      message: 'it will take 24hrs to activate your account. Thank you for join with us',
+      position: 'bottom',
+      color: 'dark',
+      buttons: [
+        {
+          text: 'Close',
+          role: 'cancel',
+          handler: () => {
+            this.modalController.dismiss();
+          }
+        }
+      ]
+    });
+    await toast.present();
+  }
 
-    this.authService.signup(email,password).subscribe(resData => {
+  onSubmit(form: NgForm) {
+    const enteredEmployeenumber: string = form.value.employeeNumber;
 
-      if (resData.localId) {
+    const result = this.allusersRegisted.find((i) => i === enteredEmployeenumber);
 
-        this.newUser.userID = resData.localId;
+    if (result == undefined) {
+      const email = form.value.emailAddress;
+      const password = form.value.password;
 
-        this.http.post<{name: string}>("https://muthukudamerchant-496e8-default-rtdb.firebaseio.com/allusers.json", this.newUser)
-      .subscribe(usersaveResData => {
-          console.log(usersaveResData);
+      this.authService.signup(email, password).subscribe(
+        (resData) => {
+          if (resData.localId) {
+            const newUser: UserDetails = {
+              userID: resData.localId,
+              firstName: form.value.firstName,
+              lastName: form.value.lastName,
+              employeeNumber: form.value.employeeNumber,
+              emailAddress: form.value.emailAddress,
+              mobileNumber: form.value.mobileNumber,
+              userType: 'broze',
+              joinYear: String(new Date().getFullYear()),
+            };
 
+            this.http
+              .post<{ name: string }>(
+                'https://muthukudamerchant-496e8-default-rtdb.firebaseio.com/allusers.json',
+                newUser
+              )
+              .subscribe((usersaveResData) => {
+                this.presentToast();
+
+              });
+          }
+        },
+        (errorRes) => {
+          const code = errorRes.error.error.message;
+          let message = 'Could not sign up';
+          console.log(errorRes);
+          if (code === 'EMAIL_EXISTS') {
+            message = 'This email already exists!';
+          }
+          else if (code === 'MISSING_PASSWORD') {
+            message = 'Missing Password!';
+          }
+          else if (code === 'INVALID_EMAIL') {
+            message = 'Invalid emaill address!';
+          }
+
+          this.showAlert(message);
         }
       );
 
-      }
-
-
-    }, errorRes => {
-      const code= errorRes.error.error.message;
-      console.log(errorRes);
-      let message ="Could not sign up";
-      if (code === 'EMAIL_EXISTS') {
-        message = 'This email already exists!';
-      }
-      this.showAlert(message);
     }
-
-    );
-
-      // this.http.post<{name: string}>("https://muthukudamerchant-496e8-default-rtdb.firebaseio.com/allusers.json", this.newUser)
-      // .subscribe(usersaveResData => {
-      //     console.log(usersaveResData);
-
-      //   }
-      // );
+    else {
+      let message = 'This Employee Number already exist';
+      this.showAlert(message);
+      return;
+    }
   }
 
   private showAlert(message: string) {
-    this.alertCtrl.create({header: 'Signup failed',
-    message: message, buttons: ['Okay']}).
-    then(alertEl => alertEl.present());
+    this.alertCtrl
+      .create({ header: 'Signup failed', message: message, buttons: ['Okay'] })
+      .then((alertEl) => alertEl.present());
   }
 
+  onClickModalDismiss() {
+    this.modalController.dismiss();
+  }
 }

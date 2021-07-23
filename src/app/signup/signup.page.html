@@ -1,27 +1,82 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>signup</ion-title>
+    <ion-title>Sign Up</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onClickModalDismiss()" >
+        <ion-icon class="header-icons" slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-    <ion-item>
-      <ion-input type="email" ngModel name="username" placeholder="Enter Username"></ion-input>
-    </ion-item>
 
-    <ion-item>
-      <ion-input type="text" ngModel name="passwordone" placeholder="Enter Password"></ion-input>
-    </ion-item>
+    <ion-list class="formlistClass">
+      <ion-item>
+        <ion-input type="text" placeholder="First Name" ngModel name="firstName" required #firstnameCtrl="ngModel"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!firstnameCtrl.valid && firstnameCtrl.touched" lines="none">
+        <ion-label class="invalidmessage" color="danger">First name is required</ion-label>
+      </ion-item>
 
-    <ion-item>
-      <ion-input type="text" ngModel name="passwordtwo" placeholder="Enter Password"></ion-input>
+      <ion-item>
+        <ion-input type="text" placeholder="Last Name" ngModel name="lastName" required #lastnameCtrl="ngModel"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!lastnameCtrl.valid && lastnameCtrl.touched" lines="none">
+        <ion-label class="invalidmessage" color="danger">Last name is required</ion-label>
+      </ion-item>
 
-    </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="Employee Number" ngModel name="employeeNumber" required #employeenumberCtrl="ngModel"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!employeenumberCtrl.valid && employeenumberCtrl.touched" lines="none">
+        <ion-label class="invalidmessage" color="danger">Employee number is required</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="email" placeholder="Email Address" ngModel name="emailAddress" required #emailaddressCtrl="ngModel"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!emailaddressCtrl.valid && emailaddressCtrl.touched" lines="none">
+        <ion-label class="invalidmessage" color="danger">Email address is required</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="number" placeholder="Mobile Number" ngModel name="mobileNumber" required #mobilenumberCtrl="ngModel"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!mobilenumberCtrl.valid && mobilenumberCtrl.touched" lines="none">
+        <ion-label class="invalidmessage" color="danger">Mobile Number is required</ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="text" placeholder="Password" ngModel name="password" required minlength="6" #passwordCtrl="ngModel"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="!passwordCtrl.valid && passwordCtrl.touched" lines="none">
+        <ion-label class="invalidmessage" color="danger">Minimum 6 characters</ion-label>
+      </ion-item>
 
 
-    <ion-button type="submit">SignUp</ion-button>
+    </ion-list>
 
   </form>
 
+  <div class="termsandconssection">
+    <ion-item lines="none">
+      <ion-label class="termsandconstitle">YoBox Online Terms and Conditions</ion-label>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-checkbox [(ngModel)]="isChecked" slot="start" color="primary"></ion-checkbox>
+      <ion-text class="termandcontext">*Yes, I have read and accept the YoBox's <a herf routerLink="/termsandconditions">Terms and Conditions</a>, <a herf routerLink="/privacypolicy">Privacy Policy</a> and <a herf routerLink="/collectionnotice">Collection Notice</a>.</ion-text>
+    </ion-item>
+
+  </div>
+
+
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button (click)="f.ngSubmit.emit()" color="primary" expand="block" [disabled]="!f.valid || !isChecked">Sign Up</ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -14,6 +14,7 @@ const routes: Routes = [
   {
     path: 'cart',
     loadChildren: () => import('./cart/cart.module').then( m => m.CartPageModule),canLoad: [AuthGuard]
+    // loadChildren: () => import('./cart/cart.module').then( m => m.CartPageModule)
   },
   {
     path: 'addtocartsecond',
@@ -26,6 +27,18 @@ const routes: Routes = [
   {
     path: 'signup',
     loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
+  },
+  {
+    path: 'termsandconditions',
+    loadChildren: () => import('./termsandconditions/termsandconditions.module').then( m => m.TermsandconditionsPageModule)
+  },
+  {
+    path: 'privacypolicy',
+    loadChildren: () => import('./privacypolicy/privacypolicy.module').then( m => m.PrivacypolicyPageModule)
+  },
+  {
+    path: 'collectionnotice',
+    loadChildren: () => import('./collectionnotice/collectionnotice.module').then( m => m.CollectionnoticePageModule)
   },
 
 ];

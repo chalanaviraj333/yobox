@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Form, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { AuthserviceService } from '../authservice.service';
 
 @Component({
@@ -11,38 +11,57 @@ import { AuthserviceService } from '../authservice.service';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private authService: AuthserviceService, private router: Router, private alertCtrl: AlertController) { }
+  constructor(private authService: AuthserviceService, private router: Router, private alertCtrl: AlertController,
+    public modalController: ModalController,
+    public toastController: ToastController) { }
 
   ngOnInit() {
   }
 
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Login Successfully.',
+      duration: 2000,
+      color: 'dark',
+    });
+    toast.present();
+  }
+
   onSubmitLogin(form: NgForm) {
 
-    const email = form.value.username;
+    const emailAdress = form.value.emailAddress;
     const password = form.value.password;
 
-    this.authService.login(email,password).subscribe(resData => {
-      console.log(resData);
-      this.router.navigateByUrl('cart');
+    this.authService.login(emailAdress,password).subscribe(resData => {
+
+      this.presentToast();
+      this.modalController.dismiss();
     }, errorRes => {
       const code= errorRes.error.error.message;
       console.log(errorRes);
-      let message ="Could not sign up";
-      if (code === 'EMAIL_EXISTS') {
-        message = 'This email already exists!';
+      let message ="Could not Login";
+      if (code === 'INVALID_PASSWORD') {
+        message = 'Invalid Password!';
       }
+      else if ('EMAIL_NOT_FOUND') {
+        message = 'Email not found!';
+      }
+
       this.showAlert(message);
     }
     );
 
-    // this.authService.login();
   }
 
 
   private showAlert(message: string) {
-    this.alertCtrl.create({header: 'Signup failed',
+    this.alertCtrl.create({header: 'Login failed',
     message: message, buttons: ['Okay']}).
     then(alertEl => alertEl.present());
+  }
+
+  onClickModalDismiss() {
+    this.modalController.dismiss();
   }
 
 }

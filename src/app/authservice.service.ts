@@ -25,6 +25,8 @@ export class AuthserviceService {
 
   private _user= new BehaviorSubject<User>(null);
 
+  isLogin: boolean = true;
+
   get userIsAuthenticated() {
     return this._user.asObservable().pipe(map(user => {
       if (user) {
@@ -85,7 +87,6 @@ export class AuthserviceService {
 
 
   login(email: string, password: string) {
-    // this._userIsAuthenticated = true;
     return this.http.post<AuthResponseData>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseAPIKey}`,
       {email: email, password: password, returnSecureToken: true}
     ).pipe(tap(userData => {
@@ -93,6 +94,7 @@ export class AuthserviceService {
       this._user.next(new User(userData.localId, userData.email, userData.idToken, expirationTime));
 
       this.storeAuthData(userData.localId, userData.idToken, expirationTime.toISOString(), userData.email);
+      this.isLogin = false;
     }));
   }
 
@@ -108,6 +110,7 @@ export class AuthserviceService {
 
   }
 
+
   private storeAuthData(userId: string, token: string, tokenExpirationDate: string, email: string) {
 
       const data = JSON.stringify({userId: userId, token: token, tokenExpirationDate: tokenExpirationDate, email: email});
@@ -116,6 +119,37 @@ export class AuthserviceService {
         value: data,
       });
 
+  }
+
+  getStorageData() {
+    // return from(Storage.get({key: 'authData'})).pipe(map(
+    //   storedData => {
+    //     if (!storedData || !storedData.value) {
+    //       return null;
+    //     }
+    //     const parsedData = JSON.parse(storedData.value) as {
+    //       token: string;
+    //       tokenExpirationDate: string;
+    //       userId: string;
+    //       email: string;
+    //     };
+    //     const expirationTIme = new Date(parsedData.tokenExpirationDate);
+    //     if (expirationTIme <= new Date()) {
+    //       return null;
+    //     }
+    //     const user = new User(parsedData.userId,
+    //       parsedData.email,
+    //       parsedData.token,
+    //       expirationTIme);
+    //       return user;
+    //   }));
+    Storage.get({key: 'authData'}).then(
+      storedData => {
+        if (!storedData || !storedData.value) {
+          return;
+        }
+        this.isLogin = false;
+      });
   }
 }
 

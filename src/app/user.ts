@@ -5,8 +5,12 @@
 // }
 
 export interface UserDetails {
-  userID?: string;
-  username?: string;
-  userType?: string;
-  joinYear?: string;
+  userID: string;
+  firstName: string;
+  lastName: string;
+  employeeNumber: string;
+  emailAddress: string;
+  mobileNumber: string;
+  userType: string;
+  joinYear: string;
 }

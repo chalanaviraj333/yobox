@@ -17,6 +17,7 @@ export class OrderconfirmService {
     this.authService.userId.pipe(take(1)).subscribe(userId => {
       if (!userId) {
         return
+
       }
 
       const userID: string = userId;
