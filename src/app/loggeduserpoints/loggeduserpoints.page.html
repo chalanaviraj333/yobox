@@ -11,12 +11,15 @@
       <ion-col size="12">
 
           <ion-item lines="none" class="bottomitemClass">
-            <ion-icon class="membercardIcon" color={{currentUser.userType}} name="person-circle-outline" slot="start"></ion-icon>
+            <ion-icon class="membercardIcon" color={{currentUser.userType}} name="star-half" slot="start"></ion-icon>
             <ion-label class="ion-text-wrap">
               <ion-text color="primary">
                 <h2 class="earnpointClass">{{currentUser.firstName}} {{currentUser.lastName}}</h2>
               </ion-text>
-              <ion-label color={{currentUser.userType}} class="bottomcardsubtitle">{{currentUser.userType}} member</ion-label>
+              <div class="ion-text-capitalize">
+                <ion-label color={{currentUser.userType}} class="bottomcardsubtitle">{{currentUser.userType}} member</ion-label>
+              </div>
+
             </ion-label>
           </ion-item>
 

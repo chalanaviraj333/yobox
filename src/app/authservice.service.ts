@@ -122,27 +122,6 @@ export class AuthserviceService {
   }
 
   getStorageData() {
-    // return from(Storage.get({key: 'authData'})).pipe(map(
-    //   storedData => {
-    //     if (!storedData || !storedData.value) {
-    //       return null;
-    //     }
-    //     const parsedData = JSON.parse(storedData.value) as {
-    //       token: string;
-    //       tokenExpirationDate: string;
-    //       userId: string;
-    //       email: string;
-    //     };
-    //     const expirationTIme = new Date(parsedData.tokenExpirationDate);
-    //     if (expirationTIme <= new Date()) {
-    //       return null;
-    //     }
-    //     const user = new User(parsedData.userId,
-    //       parsedData.email,
-    //       parsedData.token,
-    //       expirationTIme);
-    //       return user;
-    //   }));
     Storage.get({key: 'authData'}).then(
       storedData => {
         if (!storedData || !storedData.value) {
@@ -178,3 +157,26 @@ export class AuthserviceService {
 //   firebase.initializeApp(firebaseConfig);
 //   firebase.analytics();
 // </script>
+
+
+// return from(Storage.get({key: 'authData'})).pipe(map(
+    //   storedData => {
+    //     if (!storedData || !storedData.value) {
+    //       return null;
+    //     }
+    //     const parsedData = JSON.parse(storedData.value) as {
+    //       token: string;
+    //       tokenExpirationDate: string;
+    //       userId: string;
+    //       email: string;
+    //     };
+    //     const expirationTIme = new Date(parsedData.tokenExpirationDate);
+    //     if (expirationTIme <= new Date()) {
+    //       return null;
+    //     }
+    //     const user = new User(parsedData.userId,
+    //       parsedData.email,
+    //       parsedData.token,
+    //       expirationTIme);
+    //       return user;
+    //   }));

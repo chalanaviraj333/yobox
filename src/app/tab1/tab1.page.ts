@@ -18,26 +18,28 @@ export class Tab1Page implements OnInit {
   public orderAgain: Array<Product> = [];
   public islogin: boolean = false;
   public userDetails: UserDetails;
+  public deliveryDate: string = '';
 
   constructor(private http: HttpClient, private modalServie: ModalService, public cartService: CartserviceService,
     public authService: AuthserviceService) {}
 
   ngOnInit() {
 
+    // get delivery date
+    const currentDate: Date = new Date;
+    if (currentDate.getDay() < 3){
+      this.deliveryDate = 'Friday';
+    }
+    else if (currentDate.getDay() > 2 && currentDate.getDay() < 7) {
+      this.deliveryDate = 'Tuesday';
+    }
+    else {
+      this.deliveryDate = 'Friday';
+    }
+
+
     // checking user login or not
     this.authService.getStorageData();
-    // this.authService.getStorageData().subscribe(resData => {
-    //   if (!resData) {
-    //     return;
-    //   }
-    //   else {
-    //     const loggedinUserID: string = resData.id;
-    //     this.islogin = true;
-
-    //   }
-
-    // })
-
 
     // getting Special products form database
     this.http

@@ -25,13 +25,6 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-// .my-custom-class {
-//   height: 50%;
-//   top: 50%;
-//   position: absolute;
-//   display: block;
-// }
-
 
 .my-custom-class .modal-wrapper {
   --border-radius: 10px 10px 0px 0px;
@@ -44,8 +37,8 @@
 
 .my-points-page-class .modal-wrapper {
   --border-radius: 10px 10px 0px 0px;
-  --height: 40%;
-  top: 60%;
+  --height: 20%;
+  top: 80%;
   position: absolute;
   display: block;
 }

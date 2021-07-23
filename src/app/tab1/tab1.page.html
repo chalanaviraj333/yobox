@@ -20,7 +20,7 @@
   <ion-grid>
     <ion-row>
       <ion-col size="12" class="ion-text-center">
-        <ion-chip color="primary" >Order Today, Get delivered by 2021/12/21</ion-chip>
+        <ion-chip color="primary" >Next Delivery - {{deliveryDate}}</ion-chip>
       </ion-col>
     </ion-row>
     <ion-row class="signupandsigninsection" *ngIf="authService.isLogin">
@@ -176,7 +176,7 @@
     </ion-row>
 
 
-    <ion-row>
+    <ion-row *ngIf="!authService.isLogin">
       <ion-col size="12">
 
           <ion-item lines="none" class="bottomitemClass" (click)="onClickmyPoints()">

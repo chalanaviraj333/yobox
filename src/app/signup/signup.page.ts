@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Form, NgForm } from '@angular/forms';
 import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { AuthserviceService } from '../authservice.service';
+import { ModalService } from '../modal.service';
 import { UserDetails } from '../user';
 
 @Component({
@@ -16,6 +17,7 @@ export class SignupPage implements OnInit {
 
   constructor(
     private authService: AuthserviceService,
+    public modalService: ModalService,
     private alertCtrl: AlertController,
     private http: HttpClient,
     public modalController: ModalController,
@@ -125,5 +127,9 @@ export class SignupPage implements OnInit {
 
   onClickModalDismiss() {
     this.modalController.dismiss();
+  }
+
+  onclickPrivacyPolicy(headerTitle: string) {
+    this.modalService.onClicktermsprivacydeliveryterms(headerTitle);
   }
 }

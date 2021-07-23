@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>termsandconditions</ion-title>
+    <ion-title>{{headerTitle}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="onClickModalDismiss()" >
+        Done
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 

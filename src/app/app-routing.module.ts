@@ -33,12 +33,8 @@ const routes: Routes = [
     loadChildren: () => import('./termsandconditions/termsandconditions.module').then( m => m.TermsandconditionsPageModule)
   },
   {
-    path: 'privacypolicy',
-    loadChildren: () => import('./privacypolicy/privacypolicy.module').then( m => m.PrivacypolicyPageModule)
-  },
-  {
-    path: 'collectionnotice',
-    loadChildren: () => import('./collectionnotice/collectionnotice.module').then( m => m.CollectionnoticePageModule)
+    path: 'loggeduserpoints',
+    loadChildren: () => import('./loggeduserpoints/loggeduserpoints.module').then( m => m.LoggeduserpointsPageModule)
   },
 
 ];

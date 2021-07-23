@@ -67,7 +67,9 @@
 
     <ion-item lines="none">
       <ion-checkbox [(ngModel)]="isChecked" slot="start" color="primary"></ion-checkbox>
-      <ion-text class="termandcontext">*Yes, I have read and accept the YoBox's <a herf routerLink="/termsandconditions">Terms and Conditions</a>, <a herf routerLink="/privacypolicy">Privacy Policy</a> and <a herf routerLink="/collectionnotice">Collection Notice</a>.</ion-text>
+      <!-- <ion-text class="termandcontext">*Yes, I have read and accept the YoBox's <a herf routerLink="/termsandconditions">Terms and Conditions</a>, <a herf routerLink="/privacypolicy">Privacy Policy</a> and <a herf routerLink="/collectionnotice">Collection Notice</a>.</ion-text> -->
+      <ion-text class="termandcontext">*Yes, I have read and accept the YoBox's <a (click)="onclickPrivacyPolicy(x = 'Terms and Conditions')">Terms and Conditions
+      </a>, <a (click)="onclickPrivacyPolicy(x = 'Privacy Policy')">Privacy Policy</a> and <a (click)="onclickPrivacyPolicy(x = 'Collection Notice')">Collection Notice</a>.</ion-text>
     </ion-item>
 
   </div>
