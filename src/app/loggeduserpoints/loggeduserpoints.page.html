@@ -8,10 +8,10 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col size="12">
+      <ion-col size-xs="10" offset-xs="1">
 
           <ion-item lines="none" class="bottomitemClass">
-            <ion-icon class="membercardIcon" color={{currentUser.userType}} name="star-half" slot="start"></ion-icon>
+            <ion-icon class="membercardIcon" color={{currentUser.userType}} name="person-circle" slot="start"></ion-icon>
             <ion-label class="ion-text-wrap">
               <ion-text color="primary">
                 <h2 class="earnpointClass">{{currentUser.firstName}} {{currentUser.lastName}}</h2>
@@ -22,7 +22,12 @@
 
             </ion-label>
           </ion-item>
-
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size-xs="10" offset-xs="1">
+        <ion-note id="totalPointsID">*Points calculate by your monthly contribution</ion-note>
+        <ion-button expand="block" fill="outline" (click)="onClickFindDeals()">FIND MEMBER DEALS</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

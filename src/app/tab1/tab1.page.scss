@@ -105,8 +105,38 @@
 }
 
 .signupandsigninsection {
-  // border-bottom: solid 1px #d4d4d4;
-  border-top: solid 1px #d4d4d4;
   margin-bottom: 10px;
+}
+
+#secondTooolBar {
+  border-bottom: solid 1px #d4d4d4;
+  padding-left: 13px;
+  padding-right: 13px;
+}
+
+#nextdeliveryHeader {
+  font-size: 12px;
+  font-family: futura-pt,sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+#deliverydate {
+  font-family: futura-pt,sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.secondheadertitles {
+  font-family: futura-pt,sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 12px;
+}
+
+.secondheaderNumbers {
+  font-family: futura-pt,sans-serif;
+  font-weight: 700;
+  font-style: normal;
 }
 

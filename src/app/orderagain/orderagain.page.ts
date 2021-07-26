@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { CartserviceService } from '../cartservice.service';
+import { ModalService } from '../modal.service';
 import { Product } from '../product';
 
 @Component({
@@ -13,7 +13,7 @@ export class OrderagainPage implements OnInit {
 
   public orderAgainProducts: Array<Product> = [];
 
-  constructor(private http: HttpClient, public modalController: ModalController, public cartService: CartserviceService) {}
+  constructor(private http: HttpClient, public modalController: ModalController, private modalService: ModalService) {}
 
   ngOnInit() {
     this.http
@@ -58,7 +58,7 @@ export class OrderagainPage implements OnInit {
 
     const selectedItem : Product = this.orderAgainProducts.find(product => product.key === selectedproductKey);
 
-    await this.cartService.onClickAddButton(selectedItem);
+    await this.modalService.onClickAddButton(selectedItem);
   }
 
 }

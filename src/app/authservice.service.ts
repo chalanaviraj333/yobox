@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { User } from './user.model';
 import { map, tap } from 'rxjs/operators';
 import { Storage } from '@capacitor/storage';
+import { UserDetails } from './user';
 
 export interface AuthResponseData {
   kind: string;
@@ -121,13 +122,27 @@ export class AuthserviceService {
 
   }
 
-  getStorageData() {
+
+getStorageData() {
     Storage.get({key: 'authData'}).then(
       storedData => {
         if (!storedData || !storedData.value) {
           return;
         }
-        this.isLogin = false;
+        const parsedData = JSON.parse(storedData.value) as {
+          token: string;
+          tokenExpirationDate: string;
+          userId: string;
+          email: string;
+        };
+        const expirationTIme = new Date(parsedData.tokenExpirationDate);
+        if (expirationTIme <= new Date()) {
+          this.isLogin = true;
+        } else {
+          this.isLogin = false;
+        }
+
+
       });
   }
 }

@@ -14,7 +14,8 @@ export class LoggeduserpointsPage implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private http: HttpClient
+    private http: HttpClient,
+
   ) {}
 
   ngOnInit() {
@@ -48,5 +49,10 @@ export class LoggeduserpointsPage implements OnInit {
 
   _onClickDismiss() {
     this.modalController.dismiss();
+  }
+
+  onClickFindDeals() {
+    console.log('chalana');
+    // this.router.navigateByUrl('memberdeals);
   }
 }

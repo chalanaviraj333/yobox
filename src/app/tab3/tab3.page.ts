@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CartserviceService } from '../cartservice.service';
+import { ModalService } from '../modal.service';
 import { Product } from '../product';
 
 @Component({
@@ -12,7 +13,7 @@ export class Tab3Page implements OnInit {
 
   public buyMoreSaveMore: Array<Product> = [];
 
-  constructor(private http: HttpClient, private cartService: CartserviceService) {}
+  constructor(private http: HttpClient, private modalSerice: ModalService) {}
 
   ngOnInit() {
     this.http
@@ -43,7 +44,7 @@ export class Tab3Page implements OnInit {
 
     const selectedItem : Product = this.buyMoreSaveMore.find(product => product.key === selectedproductKey);
 
-    await this.cartService.onClickAddButton(selectedItem);
+    await this.modalSerice.onClickAddButton(selectedItem);
   }
 
 }

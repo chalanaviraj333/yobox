@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Cartitems } from '../cartitems';
 import { CartserviceService } from '../cartservice.service';
 import { Product } from '../product';
 
@@ -34,7 +35,13 @@ export class AddtocartsecondPage implements OnInit {
   }
 
   onClickAddtoCart() {
-    this.cartService.addtoCart();
+
+    const selectedItemwithAmount: Cartitems = this.selectedProduct;
+
+    selectedItemwithAmount.selectedQuantity = this.selectedquantity;
+
+    this.cartService.addtoCart(selectedItemwithAmount);
+    console.log(selectedItemwithAmount);
   }
 
 

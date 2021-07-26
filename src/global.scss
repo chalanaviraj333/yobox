@@ -37,8 +37,18 @@
 
 .my-points-page-class .modal-wrapper {
   --border-radius: 10px 10px 0px 0px;
-  --height: 20%;
-  top: 80%;
+  --height: 30%;
+  top: 70%;
   position: absolute;
   display: block;
+}
+
+.filtermodal-page-class .modal-wrapper{
+  --border-radius: 10px 10px 0px 0px;
+  --height: 50%;
+  top: 50%;
+  position: absolute;
+  display: block;
+  border-top: solid 2px #188841;
+
 }

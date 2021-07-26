@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { AddtocartmodalPage } from './addtocartmodal/addtocartmodal.page';
-import { AddtocartsecondPage } from './addtocartsecond/addtocartsecond.page';
+import { Cartitems } from './cartitems';
 
 @Injectable({
   providedIn: 'root'
@@ -10,22 +9,12 @@ export class CartserviceService {
 
   public cartItemsQuantity: number = 0;
 
+  public cartItems: Array<Cartitems> = [];
+
   constructor(public modalController: ModalController) { }
 
-  async onClickAddButton(selectedItem) {
-    const modal = await this.modalController.create({
-      component: AddtocartsecondPage,
-      componentProps: {
-        "selectedProduct": selectedItem
-      },
-      cssClass: 'my-custom-class',
-      swipeToClose: true,
-    });
-    return await modal.present();
-  }
-
-  addtoCart() {
-    this.cartItemsQuantity = this.cartItemsQuantity + 1;
+  addtoCart(selectedItemwithAmount: Cartitems) {
+    this.cartItems.push(selectedItemwithAmount);
     this.modalController.dismiss();
   }
 }

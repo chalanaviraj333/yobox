@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddtocartmodalPageRoutingModule } from './addtocartmodal-routing.module';
+import { FiltermodalpagePageRoutingModule } from './filtermodalpage-routing.module';
 
-import { AddtocartmodalPage } from './addtocartmodal.page';
+import { FiltermodalpagePage } from './filtermodalpage.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AddtocartmodalPageRoutingModule
+    FiltermodalpagePageRoutingModule
   ],
-  declarations: [AddtocartmodalPage]
+  declarations: [FiltermodalpagePage]
 })
-export class AddtocartmodalPageModule {}
+export class FiltermodalpagePageModule {}

@@ -1,28 +1,37 @@
-<!-- <ion-header [translucent]="true">
-
-  <ion-toolbar>
-    <ion-img class="logoheader" src="assets/icon/logo.svg"></ion-img>
-    <ion-buttons slot="end">
-      <ion-button (click)="_onClickSearch()">
-        <ion-icon class="header-icons" slot="icon-only" src="assets/icon/search.svg"></ion-icon>
-      </ion-button>
-      <ion-button routerLink="/cart">
-        <ion-badge *ngIf="cartService.cartItemsQuantity" class="cartcountClass" color="success">{{cartService.cartItemsQuantity}}</ion-badge>
-        <ion-icon class="header-icons" slot="icon-only" src="assets/icon/shopping-cart.svg"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header> -->
 
 <app-header headerURL="assets/icon/logo.svg"></app-header>
 
 <ion-content [fullscreen]="false">
+  <ion-toolbar id="secondTooolBar">
+    <ion-grid class="ion-no-padding">
+      <ion-row>
+        <ion-col size="5">
+          <ion-label class="ion-text-wrap">
+            <p id="nextdeliveryHeader">Next Delivery</p>
+            <ion-text color="primary">
+              <h2 id="deliverydate">{{deliveryDate}}</h2>
+            </ion-text>
+          </ion-label>
+        </ion-col>
+        <ion-col size="7" class="ion-text-end" *ngIf="!authService.isLogin">
+          <ion-label class="ion-text-wrap">
+            <ion-note class="secondheadertitles">Credit Limit</ion-note>
+            <ion-label class="secondheaderNumbers" color="primary">
+              {{currentUser.creditLeft || 0}}
+            </ion-label>
+          </ion-label>
+          <br>
+          <ion-label class="ion-text-wrap">
+            <ion-note class="secondheadertitles">Cash Limit</ion-note>
+            <ion-label class="secondheaderNumbers" color="primary">
+              {{currentUser.creditLeft || 0}}
+            </ion-label>
+          </ion-label>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
   <ion-grid>
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <ion-chip color="primary" >Next Delivery - {{deliveryDate}}</ion-chip>
-      </ion-col>
-    </ion-row>
     <ion-row class="signupandsigninsection" *ngIf="authService.isLogin">
       <ion-col size="6" class="ion-text-center">
         <ion-button (click)="onClickSignUp()" expand="block" color="light">Sign Up</ion-button>

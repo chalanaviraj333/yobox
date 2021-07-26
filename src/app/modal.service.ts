@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { AddtocartsecondPage } from './addtocartsecond/addtocartsecond.page';
+import { FiltermodalpagePage } from './filtermodalpage/filtermodalpage.page';
 import { LoggeduserpointsPage } from './loggeduserpoints/loggeduserpoints.page';
 import { LoginPage } from './login/login.page';
 import { SearchpagePage } from './searchpage/searchpage.page';
@@ -65,6 +67,28 @@ export class ModalService {
     });
     return await modal.present();
 
+  }
+
+  async onClickfilterItems() {
+    const modal = await this.modalController.create({
+      component: FiltermodalpagePage,
+      cssClass: 'filtermodal-page-class',
+      swipeToClose: true
+    });
+    return await modal.present();
+
+  }
+
+  async onClickAddButton(selectedItem) {
+    const modal = await this.modalController.create({
+      component: AddtocartsecondPage,
+      componentProps: {
+        "selectedProduct": selectedItem
+      },
+      cssClass: 'my-custom-class',
+      swipeToClose: true,
+    });
+    return await modal.present();
   }
 
 }

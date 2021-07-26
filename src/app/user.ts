@@ -1,9 +1,3 @@
-// export interface User {
-//   username: string;
-//   userType: string;
-//   joinYear: string;
-// }
-
 export interface UserDetails {
   userID?: string;
   firstName?: string;
@@ -13,4 +7,6 @@ export interface UserDetails {
   mobileNumber?: string;
   userType?: string;
   joinYear?: string;
+  creditLeft?: number;
+  cashLimit?: number;
 }

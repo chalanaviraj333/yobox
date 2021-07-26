@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
 
-  <ion-toolbar>
+  <ion-toolbar color="light" class="maintoolBar">
     <ion-buttons slot="start">
       <ion-back-button text="" defaultHref="/"></ion-back-button>
     </ion-buttons>
@@ -18,9 +18,92 @@
 </ion-header>
 
 <ion-content>
+  <ion-list *ngFor="let cartItem of cartItems">
+    <ion-item lines="none">
+      <ion-grid class="ion-no-padding">
+        <ion-row class="ion-no-margin">
+          <ion-col size-xs="2" class="ion-text-center">
+            <img src="{{cartItem.imageUrl}}">
+          </ion-col>
+          <ion-col size-xs="7" offset-xs="1" class="ion-text-start">
+            <ion-label class="itemDescrptionClass ion-text-wrap">{{cartItem.productname}}</ion-label>
+          </ion-col>
+          <ion-col size-xs="2" class="ion-text-end">
+            <ion-buttons class="removeButton">
+              <ion-button>
+                <ion-icon color="medium" slot="icon-only" name="close-circle"></ion-icon>
 
-  <ion-button (click)="checkUserId()">Check User ID</ion-button>
+              </ion-button>
+            </ion-buttons>
+          </ion-col>
+          </ion-row>
+          <ion-row class="itemRowClass">
+            <ion-col size-xs="6" offset-xs="3">
+              <ion-card class="minusplusCard ion-no-margin">
+                <ion-grid class="ion-no-padding">
+                  <ion-row class="minusplugrowClass">
+                    <ion-col size-xs="5" class="ion-no-padding ion-text-start">
+                      <ion-button color="medium" class="ion-no-margin buttonClass" expand="fill" (click)="onClickQdecrese(cartItem.key)">
+                        <ion-icon slot="icon-only" name="remove-outline"></ion-icon>
+                      </ion-button>
+                    </ion-col>
+                    <ion-col size-xs="2" class="ion-text-center ion-align-self-center">
+                      <ion-label class="selectedQuantityClass">{{cartItem.selectedQuantity}}</ion-label>
+                    </ion-col>
+                    <ion-col size-xs="5" class="ion-no-padding ion-text-end">
+                      <ion-button color="primary" class="ion-no-margin buttonClass" expand="fill" (click)="onClickQincrese(cartItem.key)">
+                        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+                      </ion-button>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-card>
+            </ion-col>
+            <ion-col size-xs="3" class="ion-text-end ion-align-self-end ion-no-margin">
 
-  <ion-button (click)="onclickLogout()">Logout</ion-button>
+              <ion-label class="totalamountofitem ion-text-wrap">RS {{cartItem.selectedQuantity*cartItem.productoursellingprice}}.00</ion-label>
+          </ion-col>
+          </ion-row>
+      </ion-grid>
+      <!-- <ion-grid class="ion-no-padding">
+        <ion-row class="itemRowClass ion-no-margin">
+          <ion-col size-xs="2" class="ion-text-center">
+            <img src="{{cartItem.imageUrl}}">
+          </ion-col>
+          <ion-col size-xs="6" offset-xs="1" class="ion-text-start">
+            <ion-label class="itemDescrptionClass ion-text-wrap">{{cartItem.productname}}</ion-label>
+            <ion-card class="minusplusCard">
+              <ion-grid class="ion-no-padding">
+                <ion-row class="minusplugrowClass ion-no-padding">
+                  <ion-col size-xs="5" class="ion-no-padding ion-text-start">
+                    <ion-button color="medium" class="ion-no-margin buttonClass" expand="fill" (click)="onClickQdecrese(cartItem.key)">
+                      <ion-icon slot="icon-only" name="remove-outline"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                  <ion-col size-xs="2" class="ion-text-center ion-align-self-center">
+                    <ion-label class="selectedQuantityClass">{{cartItem.selectedQuantity}}</ion-label>
+                  </ion-col>
+                  <ion-col size-xs="5" class="ion-no-padding ion-text-end">
+                    <ion-button color="primary" class="ion-no-margin buttonClass" expand="fill" (click)="onClickQincrese(cartItem.key)">
+                      <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card>
+          </ion-col>
+          <ion-col size-xs="3" class="ion-text-end ion-align-self-end">
+            <ion-buttons>
+              <ion-button>
+                <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+
+              </ion-button>
+            </ion-buttons>
+              <ion-label class="totalamountofitem ion-text-wrap">RS {{cartItem.selectedQuantity*cartItem.productoursellingprice}}.00</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid> -->
+    </ion-item>
+  </ion-list>
 
 </ion-content>

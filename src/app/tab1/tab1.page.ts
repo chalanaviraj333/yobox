@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
-import { take } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { CartserviceService } from '../cartservice.service';
 import { ModalService } from '../modal.service';
 import { AuthserviceService } from '../authservice.service';
+import { Storage } from '@capacitor/storage';
 import { UserDetails } from '../user';
 
 @Component({
@@ -16,14 +16,40 @@ export class Tab1Page implements OnInit {
 
   public specialProducts: Array<Product> = [];
   public orderAgain: Array<Product> = [];
-  public islogin: boolean = false;
-  public userDetails: UserDetails;
   public deliveryDate: string = '';
+  public currentUser: UserDetails ={};
 
   constructor(private http: HttpClient, private modalServie: ModalService, public cartService: CartserviceService,
     public authService: AuthserviceService) {}
 
   ngOnInit() {
+
+    // get loggeduserCfeditlimit
+    Storage.get({ key: 'authData' }).then((storedData) => {
+      if (!storedData || !storedData.value) {
+        return;
+      }
+      const parsedData = JSON.parse(storedData.value) as {
+        token: string;
+        tokenExpirationDate: string;
+        userId: string;
+        email: string;
+      };
+
+      this.http
+      .get<{ [key: string]: UserDetails }>(
+        'https://muthukudamerchant-496e8-default-rtdb.firebaseio.com/allusers.json'
+      )
+      .subscribe((resData) => {
+        for (const key in resData) {
+          if (resData.hasOwnProperty(key)) {
+            if (resData[key].userID == parsedData.userId) {
+              this.currentUser = resData[key];
+            }
+          }
+        }
+      });
+    });
 
     // get delivery date
     const currentDate: Date = new Date;
@@ -94,14 +120,14 @@ export class Tab1Page implements OnInit {
 
     const selectedItem : Product = this.specialProducts.find(product => product.key === selectedproductKey);
 
-    await this.cartService.onClickAddButton(selectedItem);
+    await this.modalServie.onClickAddButton(selectedItem);
   }
 
   async onClickItemAddOrderAgain(selectedproductKey) {
 
     const selectedItem : Product = this.orderAgain.find(product => product.key === selectedproductKey);
 
-    await this.cartService.onClickAddButton(selectedItem);
+    await this.modalServie.onClickAddButton(selectedItem);
   }
 
 
@@ -119,10 +145,6 @@ export class Tab1Page implements OnInit {
 
   async onClickLogIn() {
     await this.modalServie.onClickLogIn();
-  }
-
-  checkuserloign() {
-    console.log(this.islogin);
   }
 
   signoutButton() {

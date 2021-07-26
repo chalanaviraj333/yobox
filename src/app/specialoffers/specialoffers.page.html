@@ -1,26 +1,5 @@
-<!-- <ion-header [translucent]="true">
-
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button text="" defaultHref="/"></ion-back-button>
-    </ion-buttons>
-    <ion-title class="headerTitleClass">Special Offers</ion-title>
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-badge *ngIf="cartService.cartItemsQuantity" class="cartcountClass" color="success">{{cartService.cartItemsQuantity}}</ion-badge>
-        <ion-icon class="header-icons" slot="icon-only" src="assets/icon/shopping-cart.svg"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-  <ion-toolbar class="secondtoolbarClass">
-    <ion-label class="noofprodClass">{{specialProducts.length}} Products</ion-label>
-    <ion-button class="filterButtonClass" size="small" shape="round" slot="end" fill="outline">Filter</ion-button>
-
-  </ion-toolbar>
-</ion-header> -->
-
 <app-subheader subHeaderTitle="Special Offers" backButtonRedirect="/"></app-subheader>
-<ion-toolbar class="secondtoolbarClass" color="light">
+<ion-toolbar class="secondtoolbarClass">
   <ion-label class="noofprodClass">{{specialProducts.length}} Products</ion-label>
   <ion-button class="filterButtonClass" size="small" shape="round" slot="end" fill="outline">Filter</ion-button>
 

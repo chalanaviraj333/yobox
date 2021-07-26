@@ -13,8 +13,8 @@ const routes: Routes = [
   },
   {
     path: 'cart',
-    loadChildren: () => import('./cart/cart.module').then( m => m.CartPageModule),canLoad: [AuthGuard]
-    // loadChildren: () => import('./cart/cart.module').then( m => m.CartPageModule)
+    // loadChildren: () => import('./cart/cart.module').then( m => m.CartPageModule),canLoad: [AuthGuard]
+    loadChildren: () => import('./cart/cart.module').then( m => m.CartPageModule)
   },
   {
     path: 'addtocartsecond',
@@ -35,6 +35,18 @@ const routes: Routes = [
   {
     path: 'loggeduserpoints',
     loadChildren: () => import('./loggeduserpoints/loggeduserpoints.module').then( m => m.LoggeduserpointsPageModule)
+  },
+  {
+    path: 'memberdeals',
+    loadChildren: () => import('./memberdeals/memberdeals.module').then( m => m.MemberdealsPageModule)
+  },
+  {
+    path: 'productdetail',
+    loadChildren: () => import('./productdetail/productdetail.module').then( m => m.ProductdetailPageModule)
+  },
+  {
+    path: 'filtermodalpage',
+    loadChildren: () => import('./filtermodalpage/filtermodalpage.module').then( m => m.FiltermodalpagePageModule)
   },
 
 ];

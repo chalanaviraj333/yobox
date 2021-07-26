@@ -80,6 +80,8 @@ export class SignupPage implements OnInit {
               mobileNumber: form.value.mobileNumber,
               userType: 'broze',
               joinYear: String(new Date().getFullYear()),
+              creditLeft: 0,
+              cashLimit: 0,
             };
 
             this.http

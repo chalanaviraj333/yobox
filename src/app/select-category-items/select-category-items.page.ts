@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { CartserviceService } from '../cartservice.service';
+import { ModalService } from '../modal.service';
 import { Product } from '../product';
 
 @Component({
@@ -15,7 +15,7 @@ export class SelectCategoryItemsPage implements OnInit {
   public headerTitle: string = '';
   public allProducts: Array<Product> = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private http: HttpClient, public modalController: ModalController, public cartService: CartserviceService) {
+  constructor(private activatedRoute: ActivatedRoute, private http: HttpClient, public modalController: ModalController, public modalService: ModalService) {
 
     this.activatedRoute.paramMap.subscribe((paramMap) => {
       if (!paramMap.has("selectedCategory")) {
@@ -71,7 +71,7 @@ export class SelectCategoryItemsPage implements OnInit {
 
     const selectedItem : Product = this.allProducts.find(product => product.key === selectedproductKey);
 
-    await this.cartService.onClickAddButton(selectedItem);
+    await this.modalService.onClickAddButton(selectedItem);
   }
 
 }
