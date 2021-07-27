@@ -41,7 +41,6 @@ export class AddtocartsecondPage implements OnInit {
     selectedItemwithAmount.selectedQuantity = this.selectedquantity;
 
     this.cartService.addtoCart(selectedItemwithAmount);
-    console.log(selectedItemwithAmount);
   }
 
 

@@ -51,6 +51,9 @@ export class Tab1Page implements OnInit {
       });
     });
 
+    // get cart items
+    this.cartService.getCartDataStorage();
+
     // get delivery date
     const currentDate: Date = new Date;
     if (currentDate.getDay() < 3){

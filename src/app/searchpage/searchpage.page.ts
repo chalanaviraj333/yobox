@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { CartserviceService } from '../cartservice.service';
 import { ModalService } from '../modal.service';
 import { OtherService } from '../other.service';
 import { Product } from '../product';
@@ -16,7 +18,7 @@ export class SearchpagePage implements OnInit {
   public enteredValue: string = '';
 
   constructor(public modalController: ModalController, private http: HttpClient, public otherService: OtherService,
-    public modalService: ModalService) { }
+    public modalService: ModalService, public cartService: CartserviceService, private router: Router) { }
 
   ngOnInit() {
    this.otherService.getAllProducts();
@@ -38,6 +40,11 @@ export class SearchpagePage implements OnInit {
 
   onClickFilter() {
     this.modalService.onClickfilterItems();
+  }
+
+  onClickCartButton() {
+    this.router.navigateByUrl('cart');
+    this.modalController.dismiss();
   }
 
 }

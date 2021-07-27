@@ -10,7 +10,7 @@
         <ion-icon class="header-icons" slot="icon-only" src="assets/icon/search.svg"></ion-icon>
       </ion-button>
       <ion-button routerLink="/cart">
-        <ion-badge *ngIf="cartService.cartItemsQuantity" class="cartcountClass" color="success">{{cartService.cartItemsQuantity}}</ion-badge>
+        <ion-badge *ngIf="cartService.cartItems.length > 0" class="cartcountClass" color="success">{{cartService.cartItems.length}}</ion-badge>
         <ion-icon class="header-icons" slot="icon-only" src="assets/icon/shopping-cart.svg"></ion-icon>
       </ion-button>
     </ion-buttons>

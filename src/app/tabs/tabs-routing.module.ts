@@ -40,6 +40,11 @@ const routes: Routes = [
         loadChildren: () => import('../buymoresavemore/buymoresavemore.module').then( m => m.BuymoresavemorePageModule)
       },
       {
+        path: 'more/myprofile',
+        loadChildren: () => import('../myprofile/myprofile.module').then( m => m.MyprofilePageModule)
+      },
+
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

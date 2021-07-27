@@ -1,23 +1,9 @@
-<!-- <ion-header [translucent]="true">
-
-  <ion-toolbar>
-    <h2 class="headerTitleClass">More</h2>
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon class="header-icons" slot="icon-only" src="assets/icon/search.svg"></ion-icon>
-      </ion-button>
-      <ion-button>
-        <ion-icon class="header-icons" slot="icon-only" src="assets/icon/shopping-cart.svg"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header> -->
 <app-header headerTitle="More"></app-header>
 
 <ion-content [fullscreen]="false">
 
   <ion-list>
-    <ion-item detail lines="none">
+    <ion-item detail lines="none" routerLink="myprofile">
         <ion-icon slot="start" color="primary" name="person-circle-outline"></ion-icon>
       <ion-label>My Profile</ion-label>
     </ion-item>

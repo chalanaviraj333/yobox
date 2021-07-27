@@ -5,7 +5,6 @@ import { environment } from 'src/environments/environment';
 import { User } from './user.model';
 import { map, tap } from 'rxjs/operators';
 import { Storage } from '@capacitor/storage';
-import { UserDetails } from './user';
 
 export interface AuthResponseData {
   kind: string;
@@ -102,6 +101,7 @@ export class AuthserviceService {
   logout() {
     this._user.next(null);
     Storage.remove({key: 'authData'});
+    this.isLogin = true;
   }
 
   signup(email: string, password: string) {

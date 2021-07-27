@@ -1,3 +1,5 @@
+import { Cartitems } from "./cartitems";
+
 export interface UserDetails {
   userID?: string;
   firstName?: string;

@@ -48,7 +48,6 @@ const routes: Routes = [
     path: 'filtermodalpage',
     loadChildren: () => import('./filtermodalpage/filtermodalpage.module').then( m => m.FiltermodalpagePageModule)
   },
-
 ];
 @NgModule({
   imports: [

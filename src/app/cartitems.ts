@@ -9,5 +9,7 @@ export interface Cartitems {
   productstorearea?: number;
   productshell?: number;
   selectedQuantity?: number;
+  itemMaxQuantity?: number;
+  itemMinQuantity?: number;
 
 }
