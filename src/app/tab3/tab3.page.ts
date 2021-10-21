@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartserviceService } from '../cartservice.service';
 import { ModalService } from '../modal.service';
 import { Product } from '../product';
+import { AllhttpService } from '../service/allhttp.service';
 
 @Component({
   selector: 'app-tab3',
@@ -11,38 +12,15 @@ import { Product } from '../product';
 })
 export class Tab3Page implements OnInit {
 
-  public buyMoreSaveMore: Array<Product> = [];
-
-  constructor(private http: HttpClient, private modalSerice: ModalService) {}
+  constructor(public allhttp: AllhttpService, private modalSerice: ModalService) {}
 
   ngOnInit() {
-    this.http
-      .get<{ [key: string]: Product }>(
-        "https://muthukudamerchant-496e8-default-rtdb.firebaseio.com/newlyaddedproductswithoutimage.json"
-      )
-      .subscribe((resData) => {
-        for (const key in resData) {
-          if (resData.hasOwnProperty(key)) {
-            this.buyMoreSaveMore.push({
-              key,
-              productnumber: resData[key].productnumber,
-              productname: resData[key].productname,
-              imageUrl: resData[key].imageUrl,
-              productmaxsellingprice: resData[key].productmaxsellingprice,
-              productoursellingprice: resData[key].productoursellingprice,
-              quantityinstock: resData[key].quantityinstock,
-              productstorearea: resData[key].productstorearea,
-              productshell: resData[key].productshell
-            });
-            this.buyMoreSaveMore.sort((a, b) => (a.productnumber > b.productnumber ? 1 : -1));
-          }
-        }
-      });
+    this.allhttp.getAllProducts();
   }
 
   async onClickItemAdd(selectedproductKey) {
 
-    const selectedItem : Product = this.buyMoreSaveMore.find(product => product.key === selectedproductKey);
+    const selectedItem : Product = this.allhttp.allProducts.find(product => product.key === selectedproductKey);
 
     await this.modalSerice.onClickAddButton(selectedItem);
   }

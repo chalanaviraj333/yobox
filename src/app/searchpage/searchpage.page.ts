@@ -6,6 +6,7 @@ import { CartserviceService } from '../cartservice.service';
 import { ModalService } from '../modal.service';
 import { OtherService } from '../other.service';
 import { Product } from '../product';
+import { AllhttpService } from '../service/allhttp.service';
 
 @Component({
   selector: 'app-searchpage',
@@ -14,11 +15,10 @@ import { Product } from '../product';
 })
 export class SearchpagePage implements OnInit {
 
-  public searchedItems: Array<Product> = [];
   public enteredValue: string = '';
 
-  constructor(public modalController: ModalController, private http: HttpClient, public otherService: OtherService,
-    public modalService: ModalService, public cartService: CartserviceService, private router: Router) { }
+  constructor(public modalController: ModalController, public allHttp: AllhttpService, public otherService: OtherService,
+    public modalService: ModalService, public cartService: CartserviceService, private router: Router, public allhttp: AllhttpService) { }
 
   ngOnInit() {
    this.otherService.getAllProducts();
@@ -30,12 +30,15 @@ export class SearchpagePage implements OnInit {
 
   _ionChange(event) {
     this.enteredValue = event.target.value;
+    this.allHttp.searchAllProducts(this.enteredValue);
 
-    this.searchedItems = this.otherService.searchAllProducts(this.enteredValue);
+    // this.searchedItems = this.allHttp.searchAllProducts(this.enteredValue);
   }
 
-  onClickAddButton(productKey) {
-    console.log(productKey);
+  async onClickAddButton(productKey) {
+    const selectedItem : Product = this.allhttp.allProducts.find(product => product.key === productKey);
+
+    await this.modalService.onClickAddButton(selectedItem);
   }
 
   onClickFilter() {

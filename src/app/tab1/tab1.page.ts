@@ -6,6 +6,7 @@ import { ModalService } from '../modal.service';
 import { AuthserviceService } from '../authservice.service';
 import { Storage } from '@capacitor/storage';
 import { UserDetails } from '../user';
+import { AllhttpService } from '../service/allhttp.service';
 
 @Component({
   selector: 'app-tab1',
@@ -14,15 +15,16 @@ import { UserDetails } from '../user';
 })
 export class Tab1Page implements OnInit {
 
-  public specialProducts: Array<Product> = [];
-  public orderAgain: Array<Product> = [];
   public deliveryDate: string = '';
   public currentUser: UserDetails ={};
 
   constructor(private http: HttpClient, private modalServie: ModalService, public cartService: CartserviceService,
-    public authService: AuthserviceService) {}
+    public authService: AuthserviceService, public allhttp: AllhttpService) {}
 
   ngOnInit() {
+
+    // get all products
+    this.allhttp.getAllProducts();
 
     // get loggeduserCfeditlimit
     Storage.get({ key: 'authData' }).then((storedData) => {
@@ -69,66 +71,18 @@ export class Tab1Page implements OnInit {
 
     // checking user login or not
     this.authService.getStorageData();
-
-    // getting Special products form database
-    this.http
-      .get<{ [key: string]: Product }>(
-        "https://muthukudamerchant-496e8-default-rtdb.firebaseio.com/newlyaddedproductswithoutimage.json"
-      )
-      .subscribe((resData) => {
-        for (const key in resData) {
-          if (resData.hasOwnProperty(key)) {
-            this.specialProducts.push({
-              key,
-              productnumber: resData[key].productnumber,
-              productname: resData[key].productname,
-              imageUrl: resData[key].imageUrl,
-              productmaxsellingprice: resData[key].productmaxsellingprice,
-              productoursellingprice: resData[key].productoursellingprice,
-              quantityinstock: resData[key].quantityinstock,
-              productstorearea: resData[key].productstorearea,
-              productshell: resData[key].productshell
-            });
-            this.specialProducts.sort((a, b) => (a.productnumber > b.productnumber ? 1 : -1));
-          }
-        }
-      });
-
-      // getting Order again products form database
-      this.http
-      .get<{ [key: string]: Product }>(
-        "https://muthukudamerchant-496e8-default-rtdb.firebaseio.com/newlyaddedproductswithoutimage.json"
-      )
-      .subscribe((resData) => {
-        for (const key in resData) {
-          if (resData.hasOwnProperty(key)) {
-            this.orderAgain.push({
-              key,
-              productnumber: resData[key].productnumber,
-              productname: resData[key].productname,
-              imageUrl: resData[key].imageUrl,
-              productmaxsellingprice: resData[key].productmaxsellingprice,
-              productoursellingprice: resData[key].productoursellingprice,
-              quantityinstock: resData[key].quantityinstock,
-              productstorearea: resData[key].productstorearea,
-              productshell: resData[key].productshell
-            });
-            this.orderAgain.sort((a, b) => (a.productnumber > b.productnumber ? 1 : -1));
-          }
-        }
-      });
   }
 
   async onClickItemAddSpecial(selectedproductKey) {
 
-    const selectedItem : Product = this.specialProducts.find(product => product.key === selectedproductKey);
+    const selectedItem : Product = this.allhttp.allProducts.find(product => product.key === selectedproductKey);
 
     await this.modalServie.onClickAddButton(selectedItem);
   }
 
   async onClickItemAddOrderAgain(selectedproductKey) {
 
-    const selectedItem : Product = this.orderAgain.find(product => product.key === selectedproductKey);
+    const selectedItem : Product = this.allhttp.allProducts.find(product => product.key === selectedproductKey);
 
     await this.modalServie.onClickAddButton(selectedItem);
   }
@@ -154,8 +108,5 @@ export class Tab1Page implements OnInit {
     this.authService.logout();
   }
 
-  // ionViewWillEnter() {
-
-  // }
 
 }

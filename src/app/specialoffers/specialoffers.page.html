@@ -1,6 +1,6 @@
 <app-subheader subHeaderTitle="Special Offers" backButtonRedirect="/"></app-subheader>
 <ion-toolbar class="secondtoolbarClass">
-  <ion-label class="noofprodClass">{{specialProducts.length}} Products</ion-label>
+  <ion-label class="noofprodClass">{{this.allhttp.allProducts.length}} Products</ion-label>
   <ion-button class="filterButtonClass" size="small" shape="round" slot="end" fill="outline">Filter</ion-button>
 
 </ion-toolbar>
@@ -9,7 +9,7 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" *ngFor="let product of specialProducts" [class]=[product.cssClass] >
+      <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" *ngFor="let product of this.allhttp.allProducts" [class]=[product.cssClass] >
         <ion-grid>
           <ion-row>
             <img class="productImage" src="{{product.imageUrl}}" width="70" height="70">

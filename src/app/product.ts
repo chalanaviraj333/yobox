@@ -2,6 +2,7 @@ export interface Product {
   key?: string;
   productnumber: number;
   productname: string;
+  productCategory: string;
   imageUrl: string;
   productmaxsellingprice: number;
   productoursellingprice?: number;

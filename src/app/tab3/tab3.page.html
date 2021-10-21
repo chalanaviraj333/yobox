@@ -1,18 +1,3 @@
-<!-- <ion-header [translucent]="true">
-
-  <ion-toolbar>
-    <h2 class="headerTitleClass">Specials</h2>
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon class="header-icons" slot="icon-only" src="assets/icon/search.svg"></ion-icon>
-      </ion-button>
-      <ion-button>
-        <ion-icon class="header-icons" slot="icon-only" src="assets/icon/shopping-cart.svg"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header> -->
-
 <app-header headerTitle="Specials"></app-header>
 
 <ion-content [fullscreen]="false">
@@ -34,7 +19,7 @@
   </ion-row>
 
   <ion-row>
-    <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" *ngFor="let product of buyMoreSaveMore | slice:0:4; let i=index">
+    <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" *ngFor="let product of this.allhttp.allProducts | slice:0:4; let i=index">
       <ion-card
   class="ion-activatable ripple-parent ion-no-margin">
 
@@ -95,7 +80,7 @@
   </ion-row>
 
   <ion-row>
-    <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" *ngFor="let product of buyMoreSaveMore | slice:0:4; let i=index">
+    <ion-col size-xs="6" size-sm="4" size-md="3" size-lg="3" *ngFor="let product of this.allhttp.allProducts | slice:0:4; let i=index">
       <ion-card
   class="ion-activatable ripple-parent ion-no-margin">
 

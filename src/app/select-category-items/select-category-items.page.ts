@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ModalService } from '../modal.service';
 import { Product } from '../product';
+import { AllhttpService } from '../service/allhttp.service';
 
 @Component({
   selector: 'app-select-category-items',
@@ -13,63 +14,28 @@ import { Product } from '../product';
 export class SelectCategoryItemsPage implements OnInit {
 
   public headerTitle: string = '';
-  public allProducts: Array<Product> = [];
+  public selectedCategory: string = '';
 
-  constructor(private activatedRoute: ActivatedRoute, private http: HttpClient, public modalController: ModalController, public modalService: ModalService) {
+  constructor(private activatedRoute: ActivatedRoute, public allHttp: AllhttpService, public modalController: ModalController, public modalService: ModalService) {
 
     this.activatedRoute.paramMap.subscribe((paramMap) => {
       if (!paramMap.has("selectedCategory")) {
         // redirect
         return;
       }
-      const headerParam = paramMap.get("selectedCategory");
-      const result = headerParam.replace( /([A-Z])/g, " $1" );
+      this.selectedCategory = paramMap.get("selectedCategory");
+      const result = this.selectedCategory.replace( /([A-Z])/g, " $1" );
       this.headerTitle = result.charAt(0).toUpperCase() + result.slice(1);
     });
   }
 
   ngOnInit() {
-    this.http
-      .get<{ [key: string]: Product }>(
-        "https://muthukudamerchant-496e8-default-rtdb.firebaseio.com/newlyaddedproductswithoutimage.json"
-      )
-      .subscribe((resData) => {
-        for (const key in resData) {
-          if (resData.hasOwnProperty(key)) {
-            this.allProducts.push({
-              key,
-              productnumber: resData[key].productnumber,
-              productname: resData[key].productname,
-              imageUrl: resData[key].imageUrl,
-              productmaxsellingprice: resData[key].productmaxsellingprice,
-              productoursellingprice: resData[key].productoursellingprice,
-              quantityinstock: resData[key].quantityinstock,
-              productstorearea: resData[key].productstorearea,
-              productshell: resData[key].productshell,
-              cssClass: 'cssLeftClass'
-            });
-            this.allProducts.sort((a, b) => (a.productnumber > b.productnumber ? 1 : -1));
-          }
-        }
-
-        let indexofProduct: number = 0;
-
-        this.allProducts.forEach(product => {
-         indexofProduct = indexofProduct + 1;
-         if (indexofProduct % 2 == 0) {
-          product.cssClass = "cssLeftClass";
-         }
-         else {
-          product.cssClass = "cssRightClass";
-         }
-
-      });
-      });
+    this.allHttp.getCategoryProducts(this.selectedCategory);
   }
 
   async onClickAddButton(selectedproductKey) {
 
-    const selectedItem : Product = this.allProducts.find(product => product.key === selectedproductKey);
+    const selectedItem : Product = this.allHttp.selectedCategoryItems.find(product => product.key === selectedproductKey);
 
     await this.modalService.onClickAddButton(selectedItem);
   }

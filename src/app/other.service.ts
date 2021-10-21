@@ -28,6 +28,7 @@ export class OtherService {
               key,
               productnumber: resData[key].productnumber,
               productname: resData[key].productname,
+              productCategory: resData[key].productCategory,
               imageUrl: resData[key].imageUrl,
               productmaxsellingprice: resData[key].productmaxsellingprice,
               productoursellingprice: resData[key].productoursellingprice,
